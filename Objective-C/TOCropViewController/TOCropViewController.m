@@ -35,6 +35,10 @@ static const CGFloat kTOCropViewControllerToolbarHeight = 44.0f;
 /* The target image */
 @property (nonatomic, readwrite) UIImage *image;
 
+@property (nonnull, nonatomic, strong) UIImageView *bgImageView;
+
+@property (nonatomic, strong) UIButton *backButton;
+
 /* The cropping style of the crop view */
 @property (nonatomic, assign, readwrite) TOCropViewCroppingStyle croppingStyle;
 
@@ -113,7 +117,11 @@ static const CGFloat kTOCropViewControllerToolbarHeight = 44.0f;
 
     // Set up view controller properties
     self.transitioningDelegate = self;
-    self.view.backgroundColor = self.cropView.backgroundColor;
+//    self.view.backgroundColor = self.cropView.backgroundColor;
+//    [self.view addSubview:self.bgImageView];
+    
+    [self.view insertSubview:self.bgImageView atIndex:0];
+  
     
     BOOL circularMode = (self.croppingStyle == TOCropViewCroppingStyleCircular);
 
@@ -133,6 +141,16 @@ static const CGFloat kTOCropViewControllerToolbarHeight = 44.0f;
     self.toolbar.clampButtonTapped = ^{ [weakSelf showAspectRatioDialog]; };
     self.toolbar.rotateCounterclockwiseButtonTapped = ^{ [weakSelf rotateCropViewCounterclockwise]; };
     self.toolbar.rotateClockwiseButtonTapped        = ^{ [weakSelf rotateCropViewClockwise]; };
+    
+    
+    [self.view addSubview:self.backButton];
+    
+    [NSLayoutConstraint activateConstraints:@[
+        [self.backButton.topAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.topAnchor constant:16],
+        [self.backButton.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor constant:16],
+        [self.backButton.widthAnchor constraintEqualToConstant:16],
+        [self.backButton.heightAnchor constraintEqualToConstant:16]
+    ]];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -331,7 +349,7 @@ static const CGFloat kTOCropViewControllerToolbarHeight = 44.0f;
 
         // Set Y and adjust for height
         if (self.toolbarPosition == TOCropViewControllerToolbarPositionBottom) {
-            frame.size.height -= (insets.bottom + kTOCropViewControllerToolbarHeight);
+//            frame.size.height -= (insets.bottom + kTOCropViewControllerToolbarHeight);
         } else if (self.toolbarPosition == TOCropViewControllerToolbarPositionTop) {
 			frame.origin.y = kTOCropViewControllerToolbarHeight + insets.top;
             frame.size.height -= frame.origin.y;
@@ -1332,4 +1350,21 @@ static const CGFloat kTOCropViewControllerToolbarHeight = 44.0f;
     return self.cropView.minimumAspectRatio;
 }
 
+- (UIImageView *)bgImageView {
+    if(_bgImageView == nil) {
+        _bgImageView = [UIImageView new];
+        _bgImageView.frame = UIScreen.mainScreen.bounds;
+        _bgImageView.contentMode = UIViewContentModeScaleAspectFill;
+    }
+    return _bgImageView;
+}
+
+- (UIButton *)backButton {
+    if(_backButton == nil) {
+        _backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        _backButton.frame = CGRectMake(16, self.view.safeAreaInsets.top + 16, 16, 16);
+        _backButton.translatesAutoresizingMaskIntoConstraints = false;
+    }
+    return _backButton;
+}
 @end

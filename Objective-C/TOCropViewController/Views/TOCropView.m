@@ -136,7 +136,8 @@ typedef NS_ENUM(NSInteger, TOCropViewOverlayEdge) {
     
     //View properties
     self.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-    self.backgroundColor = TOCROPVIEW_BACKGROUND_COLOR;
+//    self.backgroundColor = TOCROPVIEW_BACKGROUND_COLOR;
+    self.backgroundColor = UIColor.clearColor;
     self.cropBoxFrame = CGRectZero;
     self.applyInitialCroppedImageFrame = NO;
     self.editing = NO;
@@ -184,6 +185,7 @@ typedef NS_ENUM(NSInteger, TOCropViewOverlayEdge) {
     self.overlayView = [[UIView alloc] initWithFrame:self.bounds];
     self.overlayView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     self.overlayView.backgroundColor = [self.backgroundColor colorWithAlphaComponent:0.35f];
+    self.overlayView.backgroundColor = UIColor.clearColor;
     self.overlayView.hidden = NO;
     self.overlayView.userInteractionEnabled = NO;
     [self addSubview:self.overlayView];

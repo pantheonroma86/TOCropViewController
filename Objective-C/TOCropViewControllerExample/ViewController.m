@@ -72,6 +72,10 @@
     // cropController.cancelButtonColor = [UIColor greenColor];
     [cropController.toolbar.doneIconButton setImage:[UIImage imageNamed:@"setup_confirm"] forState:UIControlStateNormal];
     [cropController.toolbar.cancelIconButton setImage:[UIImage imageNamed:@"setup_retry"] forState:UIControlStateNormal];
+    
+    cropController.bgImageView.image = [UIImage imageNamed:@"pearl_story_bg"];
+    [cropController.backButton setImage:[UIImage imageNamed:@"leftbackbtn"] forState:UIControlStateNormal];
+    
     self.image = image;
     
     //If profile picture, push onto the same navigation stack
