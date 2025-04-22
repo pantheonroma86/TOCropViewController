@@ -70,7 +70,8 @@
     // Set toolbar action button colors
     // cropController.doneButtonColor = [UIColor redColor];
     // cropController.cancelButtonColor = [UIColor greenColor];
-
+    [cropController.toolbar.doneIconButton setImage:[UIImage imageNamed:@"setup_confirm"] forState:UIControlStateNormal];
+    [cropController.toolbar.cancelIconButton setImage:[UIImage imageNamed:@"setup_retry"] forState:UIControlStateNormal];
     self.image = image;
     
     //If profile picture, push onto the same navigation stack

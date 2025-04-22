@@ -46,11 +46,26 @@
 - (instancetype)initWithFrame:(CGRect)frame
 {
     if (self = [super initWithFrame:frame]) {
-        [self setup];
+//        [self setup];
+        [self setupUI];
     }
     
     return self;
 }
+
+- (void)setupUI {
+    
+    _cancelIconButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [_cancelIconButton setImage:[TOCropToolbar cancelImage] forState:UIControlStateNormal];
+    [_cancelIconButton addTarget:self action:@selector(buttonTapped:) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:_cancelIconButton];
+    
+    _doneIconButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [_doneIconButton setImage:[TOCropToolbar doneImage] forState:UIControlStateNormal];
+    [_doneIconButton addTarget:self action:@selector(buttonTapped:) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:_doneIconButton];
+}
+
 
 - (void)setup {
     self.backgroundView = [[UIView alloc] initWithFrame:self.bounds];
@@ -145,7 +160,15 @@
                                                                          nil);
     [self addSubview:_resetButton];
 }
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    
+    _cancelIconButton.frame = CGRectMake( self.frame.size.width/2.0 - 60 - 30, self.frame.size.height/2.0 - 30, 60, 60);
+    _doneIconButton.frame = CGRectMake(self.frame.size.width/2.0 + 30, self.frame.size.height/2.0 - 30, 60, 60);
+}
 
+/*
 - (void)layoutSubviews
 {
     [super layoutSubviews];
@@ -282,6 +305,7 @@
         [self layoutToolbarButtons:buttonsInOrderVertically withSameButtonSize:buttonSize inContainerRect:containerRect horizontally:NO];
     }
 }
+*/
 
 // The convenience method for calculating button's frame inside of the container rect
 - (void)layoutToolbarButtons:(NSArray *)buttons withSameButtonSize:(CGSize)size inContainerRect:(CGRect)containerRect horizontally:(BOOL)horizontally

@@ -26,10 +26,12 @@
 #import "TOCropViewConstants.h"
 #import "TOCropView.h"
 #import "TOCropToolbar.h"
+//#import "TOCropConfiguration.h"
 #else
 #import <TOCropViewController/TOCropViewConstants.h>
 #import <TOCropViewController/TOCropView.h>
 #import <TOCropViewController/TOCropToolbar.h>
+//#import <TOCropViewController/TOCropConfiguration.h>
 #endif
 
 @class TOCropViewController;

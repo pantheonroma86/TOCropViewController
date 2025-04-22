@@ -21,6 +21,7 @@ class ViewController: UIViewController, CropViewControllerDelegate, UIImagePicke
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         guard let image = (info[UIImagePickerController.InfoKey.originalImage] as? UIImage) else { return }
         
+        return
         let cropController = CropViewController(croppingStyle: croppingStyle, image: image)
         //cropController.modalPresentationStyle = .fullScreen
         cropController.delegate = self
@@ -57,7 +58,10 @@ class ViewController: UIViewController, CropViewControllerDelegate, UIImagePicke
 
         // Change toolbar layout direction
         // cropController.toolbar.reverseContentLayout = true
-
+        cropController.toolbar.cancelIconButton.setImage(UIImage(resource: .setupRetry), for: .normal)
+        cropController.toolbar.doneIconButton.setImage(UIImage(resource: .setupConfirm), for: .normal)
+        
+        print(cropController.toolbar)
         self.image = image
         
         //If profile picture, push onto the same navigation stack
