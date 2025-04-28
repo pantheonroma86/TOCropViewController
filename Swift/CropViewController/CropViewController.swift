@@ -193,6 +193,10 @@ open class CropViewController: UIViewController, TOCropViewControllerDelegate {
         return toCropViewController.titleLabel
     }
     
+    public var subTitleLabel: UILabel? {
+        return toCropViewController.subTitleLabel
+    }
+    
     /**
      If true, while it can still be resized, the crop box will be locked to its current aspect ratio.
      

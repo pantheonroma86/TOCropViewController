@@ -75,6 +75,8 @@
     
     cropController.bgImageView.image = [UIImage imageNamed:@"pearl_story_bg"];
     [cropController.backButton setImage:[UIImage imageNamed:@"leftbackbtn"] forState:UIControlStateNormal];
+    cropController.subTitleLabel.text = @"Look Here is your avatar";
+    
     
     self.image = image;
     

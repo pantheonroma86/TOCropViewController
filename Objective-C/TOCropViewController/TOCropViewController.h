@@ -179,6 +179,11 @@
 @property (nullable, nonatomic, readonly) UILabel *titleLabel;
 
 /**
+ Title label which can be used to show instruction on the top of the crop view controller
+ */
+@property (nullable, nonatomic, readonly) UILabel *subTitleLabel;
+
+/**
  Title for the 'Done' button.
  Setting this will override the Default which is a localized string for "Done".
  */

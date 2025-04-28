@@ -47,6 +47,7 @@ static const CGFloat kTOCropViewControllerToolbarHeight = 44.0f;
 @property (nonatomic, strong, readwrite) TOCropView *cropView;
 @property (nonatomic, strong) UIView *toolbarSnapshotView;
 @property (nonatomic, strong, readwrite) UILabel *titleLabel;
+@property (nonatomic, strong, readwrite) UILabel *subTitleLabel;
 
 /* Transition animation controller */
 @property (nonatomic, copy) void (^prepareForTransitionHandler)(void);
@@ -151,6 +152,15 @@ static const CGFloat kTOCropViewControllerToolbarHeight = 44.0f;
         [self.backButton.widthAnchor constraintEqualToConstant:16],
         [self.backButton.heightAnchor constraintEqualToConstant:16]
     ]];
+    
+    [self.view addSubview:self.subTitleLabel];
+    [NSLayoutConstraint activateConstraints:@[
+        [self.subTitleLabel.topAnchor constraintEqualToAnchor:self.backButton.bottomAnchor constant:8],
+        [self.subTitleLabel.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor constant:16],
+        [self.subTitleLabel.widthAnchor constraintEqualToAnchor:self.view.widthAnchor constant:-32],
+        [self.subTitleLabel.heightAnchor constraintEqualToConstant:36]
+    ]];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -1138,6 +1148,22 @@ static const CGFloat kTOCropViewControllerToolbarHeight = 44.0f;
 
     return _titleLabel;
 }
+
+- (UILabel *)subTitleLabel
+{
+    if (_subTitleLabel) { return _subTitleLabel; }
+
+    _subTitleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+    _subTitleLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
+    _subTitleLabel.backgroundColor = [UIColor clearColor];
+    _subTitleLabel.textColor = [UIColor whiteColor];
+    _subTitleLabel.numberOfLines = 1;
+    _subTitleLabel.baselineAdjustment = UIBaselineAdjustmentAlignBaselines;
+    _subTitleLabel.clipsToBounds = YES;
+    _subTitleLabel.translatesAutoresizingMaskIntoConstraints = false;
+    return _subTitleLabel;
+}
+
 
 - (void)setAspectRatioLockEnabled:(BOOL)aspectRatioLockEnabled
 {
